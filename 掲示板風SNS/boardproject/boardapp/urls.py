@@ -1,13 +1,17 @@
-from django.urls import path
+from django.urls import path,re_path
+from django.views.generic import RedirectView
 from .views import signupfunc, loginfunc, listfunc, logoutfunc, detailfunc, goodfunc, readfunc, BoardCreate
-
 urlpatterns = [
+    path('', listfunc, name='list'),
     path('signup/', signupfunc, name='signup'),
     path('login/', loginfunc, name='login'),
     path('list/', listfunc, name='list'),
+
     path('logout/', logoutfunc, name='logout'),
     path('detail/<int:pk>', detailfunc, name='detail'),
     path('good/<int:pk>', goodfunc, name='good'),
     path('read/<int:pk>', readfunc, name='read'),
     path('create/', BoardCreate.as_view(), name='create'),
 ]
+
+urlpatterns+=[re_path(r'^.*$',RedirectView.as_view(url='/')),]
