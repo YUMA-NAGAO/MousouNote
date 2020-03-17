@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    {{ form.non_field_errors }}
+{#    ログインの時に確認用パスワードを使うときに使用するもの#}
+    {% for field in form %}
+        <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+        {{ field }}
+        {{ field.errors }}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-dark">送信</button>
+    {% csrf_token %}
+    </form>
+
+{% endblock %}
